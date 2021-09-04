@@ -1,0 +1,28 @@
+{
+   "name": "hypixel-knights",
+   "version": "1.0.0",
+   "description": "Discord bot for the Hypixel Knights Discord.",
+   "author": "xMdb",
+   "license": "GPL-3.0",
+   "homepage": "https://github.com/xMdb/hypixel-knights",
+   "bugs": {
+      "url": "https://github.com/xMdb/hypixel-knights/issues"
+   },
+   "scripts": {
+      "start": "pm2 start app.js",
+      "dev": "node .",
+      "lint": "npx eslint ."
+   },
+   "dependencies": {
+      "chalk": "^4.1.2",
+      "dayjs": "^1.10.6",
+      "discord.js": "^13.1.0",
+      "dotenv": "^10.0.0",
+      "hastebin": "^0.2.1",
+      "node-cmd": "^5.0.0",
+      "node-fetch": "^3.0.0"
+   },
+   "devDependencies": {
+      "eslint": "^7.32.0"
+   }
+}
