@@ -1,4 +1,4 @@
-# Hypixel Guild Chat Bot
+# Hypixel Knights Bot
 
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](http://gitmoji.dev/) [![Commit Activity](https://img.shields.io/github/commit-activity/w/xMdb/hypixel-guild-chat-bot)](https://github.com/xMdb/hypixel-guild-chat-bot/commits/main/)
 
