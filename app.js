@@ -40,7 +40,8 @@ for (const folder of commandFolders) {
 
 bot.on('interactionCreate', async (interaction) => {
    // —— Run command
-   if (!bot.commands.has(interaction.commandName) || !interaction.isCommand()) return;
+   if (!bot.commands.has(interaction.commandName)) return;
+   if (!interaction.isCommand() && !interaction.isContextMenu()) return;
    try {
       await bot.commands.get(interaction.commandName).execute(interaction, bot);
    } catch (err) {

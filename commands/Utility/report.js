@@ -34,7 +34,7 @@ module.exports = {
                type: 'STRING',
                description:
                   'The URL of the offending message. Obtain this by pressing the 3 dots and then Copy Message Link.',
-               required: false,
+               required: true,
             },
          ],
       };
