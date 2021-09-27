@@ -19,8 +19,8 @@ module.exports = {
             {
                name: 'destination',
                type: 'CHANNEL',
-               description: 'Channel to send a message to',
-               required: true,
+               description: 'Channel to send a message to (optional)',
+               required: false,
             },
          ],
       };
@@ -31,6 +31,11 @@ module.exports = {
             type: 'USER',
             permission: true,
          },
+         {
+            id: config.ids.moderatorRole,
+            type: 'ROLE',
+            permission: true,
+         },
       ];
       const commandProd = await bot.guilds.cache.get(config.ids.server)?.commands.create(data);
       const commandDev = await bot.guilds.cache.get(config.ids.testingServer)?.commands.create(data);
@@ -38,7 +43,8 @@ module.exports = {
       await commandDev.permissions.add({ permissions });
 
       const message = interaction.options.getString('message');
-      const destination = interaction.options.getChannel('destination');
+      let destination = interaction.options.getChannel('destination');
+      if (!destination) destination = interaction.channel;
       try {
          if (destination.type !== 'GUILD_TEXT') {
             return interaction.reply({ content: `The channel provided is not a text channel.`, ephemeral: true });
