@@ -3,7 +3,7 @@ const config = require('../../config');
 
 module.exports = {
    name: 'say',
-   description: 'The bot will repeat whatever you input (bot owner only)',
+   description: 'The bot will repeat whatever you input (moderators only)',
    async execute(interaction, bot) {
       const data = {
          name: this.name,
