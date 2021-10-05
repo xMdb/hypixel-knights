@@ -94,7 +94,7 @@ module.exports = {
                interaction.user
             }\n\n**Offender**: ${user}\n**Reason**: ${reason}\n**Evidence**: ${
                evidence ?? "No evidence provided. This shouldn't appear!"
-            })`
+            }`
          )
          .setTimestamp()
          .setFooter(`Click a button to mark the report as either completed or invalid`);
