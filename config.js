@@ -14,7 +14,7 @@ module.exports = {
       noPermissionNormal: 'You do not have the correct permissions to use this command.',
       noPermissionDev: "You shouldn't be using this command.",
       selfNoPermissions: 'Sorry, I do not have the correct permissions to perform that task.',
-      footer: 'Hypixel Knights Bot',
+      footer: 'Hypixel Knights',
    },
 
    colours: {
