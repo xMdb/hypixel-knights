@@ -64,7 +64,7 @@ module.exports = {
       await bot.guilds.cache.get(config.ids.testingServer)?.commands.create(data);
       const user = interaction.options.getUser('offender');
       const channel = interaction.options.getChannel('channel');
-      const link = interaction.options.getString('link');
+      const evidence = interaction.options.getString('evidence');
       const reason = interaction.options.getString('reason');
       const unix = dayjs().unix();
 
@@ -85,12 +85,16 @@ module.exports = {
          .setColor(config.colours.success)
          .setDescription(`Staff have received your report for ${user}. Thanks for reporting!`)
          .setTimestamp()
-         .setFooter(` `, interaction.user.displayAvatarURL({ dynamic: true }));
+         .setFooter(config.messages.footer, interaction.user.displayAvatarURL({ dynamic: true }));
       const reportLog = new MessageEmbed()
          .setTitle(msgs[index])
          .setColor(config.colours.informational)
          .setDescription(
-            `**Time**: <t:${unix}:f> (<t:${unix}:R>)\n**Channel**: ${channel}\n**Reporter**: ${interaction.user}\n\n**Offender**: ${user}\n**Reason**: ${reason}\n**Message**: [Click to Jump](${link})`
+            `**Time**: <t:${unix}:f> (<t:${unix}:R>)\n**Channel**: ${channel}\n**Reporter**: ${
+               interaction.user
+            }\n\n**Offender**: ${user}\n**Reason**: ${reason}\n**Evidence**: ${
+               evidence ?? "No evidence provided. This shouldn't appear!"
+            })`
          )
          .setTimestamp()
          .setFooter(`Click a button to mark the report as either completed or invalid`);
