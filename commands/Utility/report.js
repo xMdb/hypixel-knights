@@ -30,10 +30,10 @@ module.exports = {
                required: true,
             },
             {
-               name: 'link',
+               name: 'evidence',
                type: 'STRING',
                description:
-                  'The URL of the offending message. Obtain this by pressing the 3 dots and then Copy Message Link.',
+                  'Please provide evidence such as a link to an image, message, or the channel it is/was happening in.',
                required: true,
             },
          ],
