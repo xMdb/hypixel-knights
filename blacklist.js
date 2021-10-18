@@ -21,5 +21,6 @@ module.exports = {
       'bruhga',
       'bruhgga',
       'blackass',
+      'zwosta',
    ],
 };
