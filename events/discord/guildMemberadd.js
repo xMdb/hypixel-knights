@@ -8,10 +8,10 @@ module.exports = {
    async execute(member) {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
-      blacklisted.forEach((word, i) => {
+      blacklisted.forEach((badWord, i) => {
          const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
          // have to include the long blacklist checker in each if statement because of how for loops work
-         if (newAccount && member.user.username.toLowerCase().includes(blacklisted[word].toLowerCase())) {
+         if (newAccount && member.user.username.toLowerCase().includes(badWord.toLowerCase())) {
             channel.send({
                content: `<@&762473575277133824>\n\n:no_entry_sign: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter** and their account has been **created within the past 24 hours**. Most likely an alt!`,
             });
@@ -20,7 +20,7 @@ module.exports = {
          }
          if (
             newAccount &&
-            !member.user.username.toLowerCase().includes(blacklisted[word].toLowerCase()) &&
+            !member.user.username.toLowerCase().includes(badWord.toLowerCase()) &&
             i === blacklisted.length - 1
          ) {
             channel.send({
@@ -29,7 +29,7 @@ module.exports = {
             console.log(chalk.yellowBright(`User ${member.user.username} is a new account`));
             return;
          }
-         if (member.user.username.toLowerCase().includes(blacklisted[word].toLowerCase())) {
+         if (member.user.username.toLowerCase().includes(badWord.toLowerCase())) {
             channel.send({
                content: `<@&762473575277133824>\n\n:warning: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter**. Maybe it's time for the ban hammer?`,
             });
