@@ -8,32 +8,34 @@ module.exports = {
    async execute(member) {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
-      blacklisted.forEach(user, i) {
+      blacklisted.forEach((words, i) => {
          const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
          // have to include the long blacklist checker in each if statement because of how for loops work
-         if (newAccount && member.user.username.toLowerCase().includes(blacklisted[users].toLowerCase())) {
+         if (newAccount && member.user.username.toLowerCase().includes(blacklisted[words].toLowerCase())) {
             channel.send({
                content: `<@&762473575277133824>\n\n:no_entry_sign: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter** and their account has been **created within the past 24 hours**. Most likely an alt!`,
             });
             console.log(chalk.redBright(`User ${member.user.username} is an alt`));
             return;
          }
-
-         if (newAccount && !member.user.username.toLowerCase().includes(blacklisted[users].toLowerCase()) && i === blacklisted.lenth - 1) {
+         if (
+            newAccount &&
+            !member.user.username.toLowerCase().includes(blacklisted[words].toLowerCase()) &&
+            i === blacklisted.length - 1
+         ) {
             channel.send({
                content: `<@&762473575277133824>\n\n:information_source: The account ${member} / ${member.user.username} has been **created within the past 24 hours**. If you know their name, it's probably an alt.`,
             });
             console.log(chalk.yellowBright(`User ${member.user.username} is a new account`));
             return;
          }
-
-         if (member.user.username.toLowerCase().includes(blacklisted[users].toLowerCase())) {
+         if (member.user.username.toLowerCase().includes(blacklisted[words].toLowerCase())) {
             channel.send({
                content: `<@&762473575277133824>\n\n:warning: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter**. Maybe it's time for the ban hammer?`,
             });
             console.log(chalk.redBright(`User ${member.user.username} matched blacklist filter`));
             return;
          }
-      }
+      });
    },
 };
