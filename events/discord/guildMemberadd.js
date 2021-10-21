@@ -8,8 +8,10 @@ module.exports = {
    async execute(member) {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
-      blacklisted.forEach((badWord, i) => {
+      for (const badWord in blacklisted) {
          const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
+         const i = blacklisted.indexOf(badWord);
+         
          // have to include the long blacklist checker in each if statement because of how for loops work
          if (newAccount && member.user.username.toLowerCase().includes(badWord.toLowerCase())) {
             channel.send({
@@ -36,6 +38,6 @@ module.exports = {
             console.log(chalk.redBright(`User ${member.user.username} matched blacklist filter`));
             return;
          }
-      });
+      };
    },
 };
