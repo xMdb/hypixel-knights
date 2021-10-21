@@ -8,7 +8,7 @@ module.exports = {
    async execute(member) {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
-      for (badWord in blacklisted) {
+      for (const badWord in blacklisted) {
          const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
          const i = blacklisted.indexOf(badWord);
          
