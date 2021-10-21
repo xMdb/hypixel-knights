@@ -8,7 +8,7 @@ module.exports = {
    async execute(member) {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
-      blacklist.forEach(user, i) {
+      blacklisted.forEach(user, i) {
          const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
          // have to include the long blacklist checker in each if statement because of how for loops work
          if (newAccount && member.user.username.toLowerCase().includes(blacklisted[users].toLowerCase())) {
