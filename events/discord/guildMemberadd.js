@@ -9,11 +9,11 @@ module.exports = {
       const channel = member.guild.channels.cache.find((ch) => ch.id === config.ids.logChannel);
       if (!channel || member.guild.id !== config.ids.server) return;
       blacklisted.forEach((badWord, i) => {
-         const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24;
+         const newAccount = Date.now() - member.user.createdAt < 1000 * 60 * 60 * 24 * 3;
          // have to include the long blacklist checker in each if statement because of how for loops work
          if (newAccount && member.user.username.toLowerCase().includes(badWord.toLowerCase())) {
             channel.send({
-               content: `<@&${config.ids.moderatorRole}>\n\n:no_entry_sign: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter** and their account has been **created within the past 24 hours**. Most likely an alt!`,
+               content: `<@&${config.ids.moderatorRole}>\n\n:no_entry_sign: User ${member} / ${member.user.username} has been **detected by the blacklisted usernames filter** and their account has been **created within the past 3 days**. Most likely an alt!`,
             });
             console.log(chalk.redBright(`User ${member.user.username} is an alt`));
             return;
@@ -24,7 +24,7 @@ module.exports = {
             i === blacklisted.length - 1
          ) {
             channel.send({
-               content: `:information_source: The account ${member} / ${member.user.username} has been **created within the past 24 hours**. If you know their name, it's probably an alt.`,
+               content: `:information_source: The account ${member} / ${member.user.username} has been **created within the past 3 days**. If you know their name, it's probably an alt.`,
             });
             console.log(chalk.yellowBright(`User ${member.user.username} is a new account`));
             return;
