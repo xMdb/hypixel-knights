@@ -1,5 +1,3 @@
-# Hypixel Knights Bot
-
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](http://gitmoji.dev/) [![Commit Activity](https://img.shields.io/github/commit-activity/w/xMdb/hypixel-knights)](https://github.com/xMdb/hypixel-knights/commits/main/)
 
 ## Welcome
