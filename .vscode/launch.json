@@ -10,7 +10,8 @@
          "name": "Launch Program",
          "skipFiles": ["<node_internals>/**"],
          "program": "${file}",
-         "cwd": "${workspaceRoot}"
+         "cwd": "${workspaceRoot}",
+         "trace": true
       }
    ]
 }

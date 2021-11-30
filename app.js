@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const fs = require('fs');
-const { Client, Intents, Collection, WebhookClient } = require('discord.js');
+const { Client, Intents, Collection, WebhookClient, MessageEmbed } = require('discord.js');
 const bot = new Client({
    allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
    intents: [Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS],
@@ -54,6 +54,43 @@ bot.on('interactionCreate', async (interaction) => {
          ephemeral: true,
       });
       webhook.send(`**General command error:** \`\`\`${err}\`\`\``);
+   }
+});
+
+// define counter and decrease by 1 every minute and a bit unless it is already at 0
+let counter = 0;
+setInterval(() => {
+   if (counter === 0) return;
+   else return counter--;
+}, 1000 * 90);
+
+// create a counter that increments every time the guildMemberAdd event is fired and detect when it reaches 3
+bot.on('guildMemberAdd', async (member) => {
+   // if the counter is 3, reset it and send the message
+   if (counter === 3) {
+      counter = 0;
+      const recentMembers = member.guild.members.cache.filter((m) => m.joinedAt > Date.now() - 1000 * 60 * 60);
+      const recentEmbed = new MessageEmbed()
+         .setColor(config.colours.error)
+         .setTitle('Members Joined in the Past Hour')
+         .setDescription(
+            recentMembers
+               .map((recent) => `<@${recent.user.id}> / ${recent.user.username}#${recent.user.discriminator}`)
+               .join('\n')
+         )
+         .setTimestamp()
+         .setFooter(config.messages.footer);
+      member.guild.channels.cache
+         .find((ch) => ch.id === config.ids.logChannel)
+         .send({
+            content: `🚨 <@&${config.ids.moderatorRole}> 🚨\n\nThere has been at least 3 people joining in the past minute or two, and the counter has passed the alert threshold. We could be getting raided! Check <#520963360926334996>!\n\n`,
+            embeds: [recentEmbed],
+         });
+      console.log(`Raid detected!`);
+      return;
+   } else {
+      // if the counter is not 3, increment it
+      return counter++;
    }
 });
 
